@@ -1,10 +1,16 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.File;
 
 class calc{
     public static void main(String[] args) {
         File file = new File("test.txt");
-        Scanner sc = new Scanner(file);
+        Scanner sc;
+        try {
+            sc = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         String a = sc.next();
         String op = sc.next();
         String b = sc.next();
@@ -12,14 +18,14 @@ class calc{
         try {
             char[] aArr = a.toCharArray();
             char[] bArr = b.toCharArray();
-            for (int i=0; i< aArr.length;i++){
+            for (char c : aArr) {
                 // System.out.println(i+" "+String.valueOf(aArr[i]).equals("."));
-                if (!Character.isDigit(aArr[i]) && !(String.valueOf(aArr[i]).equals(".") || String.valueOf(aArr[i]).equals("-"))) {
+                if (!Character.isDigit(c) && !(String.valueOf(c).equals(".") || String.valueOf(c).equals("-"))) {
                     throw new Exception("Error! Not number");
                 }
             }
-            for (int i=0; i< bArr.length;i++){
-                if (!Character.isDigit(bArr[i]) && !(String.valueOf(bArr[i]).equals(".") || String.valueOf(bArr[i]).equals("-"))) {
+            for (char c : bArr) {
+                if (!Character.isDigit(c) && !(String.valueOf(c).equals(".") || String.valueOf(c).equals("-"))) {
                     throw new Exception("Error! Not number");
                 }
             }
@@ -29,8 +35,8 @@ class calc{
             if (op.equals("/") && b.equals("0")) {
                 throw new Exception("Error! Division by zero");
             }
-            double a1 = Double.valueOf(a);
-            double b1 = Double.valueOf(b);
+            double a1 = Double.parseDouble(a);
+            double b1 = Double.parseDouble(b);
             if (op.equals("+")) {
                 System.out.println(a1 + b1);
             }
