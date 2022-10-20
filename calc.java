@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 
-class MyProgram{
+class calc{
     public static void main(String[] args) {
         File file = new File("test.txt");
         Scanner sc = new Scanner(file);
