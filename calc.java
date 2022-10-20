@@ -1,10 +1,12 @@
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 import java.io.File;
 
 class calc{
-    public static void main(String[] args) {
-        File file = new File("test.txt");
+    public static void main(String[] args) throws FileNotFoundException {
+        File file = new File("input.txt");
         Scanner sc;
         try {
             sc = new Scanner(file);
@@ -14,6 +16,9 @@ class calc{
         String a = sc.next();
         String op = sc.next();
         String b = sc.next();
+
+        FileOutputStream fos=new FileOutputStream("output.txt");
+        PrintStream printStream = new PrintStream(fos);
 
         try {
             char[] aArr = a.toCharArray();
@@ -38,20 +43,20 @@ class calc{
             double a1 = Double.parseDouble(a);
             double b1 = Double.parseDouble(b);
             if (op.equals("+")) {
-                System.out.println(a1 + b1);
+                printStream.println(a1 + b1);
             }
             if (op.equals("-")) {
-                System.out.println(a1 - b1);
+                printStream.println(a1 - b1);
             }
             if (op.equals("*")) {
-                System.out.println(a1 * b1);
+                printStream.println(a1 * b1);
             }
             if (op.equals("/")) {
-                System.out.println(a1 / b1);
+                printStream.println(a1 / b1);
             }
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            printStream.println(ex.getMessage());
         }
     }
 }
